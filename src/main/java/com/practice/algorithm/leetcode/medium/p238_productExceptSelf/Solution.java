@@ -21,8 +21,35 @@ import java.util.Arrays;
 
 public class Solution {
 
-
     public static int[] productExceptSelf(int[] nums) {
+        int []answer=new int[nums.length];
+        Arrays.fill(answer,1);
+        int r=1;
+         /**
+          * 1.不管怎么说都是两个循环，把answer当作是left了.但是要考虑一下边界了
+          * 2.不对，r也要同步啊，不然得不到了
+          * 3.但是怎么记录r呢，如果只用一个的话
+          * 4.目前的关键点就是随着answer的递进，对应的数值改变了---所以不对
+          * 5.双向遍历，r要乘的是对应的left---只让answer作为left对应值
+          * 6.应该是二者相遇为结束
+          * 7。问题在于r是不存储的
+          * */
+         //终于知道哪里错了，忽略了是nums
+
+        for (int i = 1; i < nums.length; i++) {
+
+             answer[i]=answer[i-1]*nums[i-1];//确定left
+        }
+        for (int i = nums.length-2; i >=0; i--) {
+            r=r*nums[i+1];//此时的r
+            answer[i]=answer[i]*r;
+        }
+
+        return answer;
+    }
+
+    ///这是看题解的第一种解法，空间复杂度为n
+   /* public static int[] productExceptSelf(int[] nums) {
         int[] mix=new int[nums.length];
         int[] left=new int[nums.length];
         int[] right =new int[nums.length];
@@ -35,8 +62,9 @@ public class Solution {
         for (int i = 0; i < right.length; i++) {
             mix[i]=right[i]*left[i];
         }
+
         return mix;
-    }
+    }*/
 
     public static void main(String[] args) {
          int [] n=new int[]{1,2,3,4};
