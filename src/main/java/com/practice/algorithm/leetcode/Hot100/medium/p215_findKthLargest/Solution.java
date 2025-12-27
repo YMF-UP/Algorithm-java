@@ -21,6 +21,43 @@ public class Solution {
 
      }
     public static int findKthLargest(int[] nums, int k) {
+        int left=0;
+        int right=nums.length-1;
+        int privot=0;
+        int value=nums[0];//一开始的
+        while (true) {
+            while (left < right) {
+                while (value >= nums[right] & left < right) {
+                    right--;
+                }
+                while (value <= nums[left] & left < right) {
+                    left++;
+                }
+                if (left < right) {
+                    swap(nums, left, right);
+                }
+                //知道为什么之前一直纠结于那个判断条件了---因为我带入快排的话--要一直循环才能确定最终枢纽位置
+                //但是这个有点变化在于两者相等是最终条件---但我记得deep seek给了一个很新的--回来再看吧
+                //问题来了，这要如何判断枢纽呢？--不对也要加一个循环---while (left<right)---但是right和left会改变所以循环会存在---或者说用一个true
+            }
+            privot=right;//方便看和记录--用right或left的话容易混
+            if (privot==(k-1)){
+                return nums[privot];
+            } else if (privot>(k-1)) {
+               right-=1;
+               left=0;
+
+            } else if (privot<(k-1)) {
+                left+=1;
+                right=nums.length-1;
+
+            }//好像又不对,这样都得改一下啊---还是我搞混了快排的枢纽吗？--这个和枢纽没关系吗难道？---那不会了
+            value=nums[left];
+
+        }
+
+
+         /**  还是不对，具体就不应该把当前位置当作判断条件---还是写一下题解吧
           int find=nums[0];
           int right=nums.length-1;
           int left=0;//像快排一样
@@ -73,6 +110,7 @@ public class Solution {
             }
 
         return  nums[k-1];
+          */
 
 
 
