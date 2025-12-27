@@ -7,16 +7,77 @@ package com.practice.algorithm.leetcode.Hot100.medium.p215_findKthLargest;
  * LeetCode 215.
  * 题目描述：
  * 示例：
- * 解题思路：
+ * 解题思路：  题解是用了快速选择---从快排上面的延申---其实我快排还行啊，但确实没想到
  * 时间复杂度：O(...)
  * 空间复杂度：O(...)
  */
 
 
 public class Solution {
+     public static   void swap(int []nums,int a,int b){
+         int c=nums[a];
+         nums[a]=nums[b];
+         nums[b]=c;
 
-    public int findKthLargest(int[] nums, int k) {
-           int find=nums[0];
+     }
+    public static int findKthLargest(int[] nums, int k) {
+          int find=nums[0];
+          int right=nums.length-1;
+          int left=0;//像快排一样
+          int m=0;//
+          //即便知道了快速选择也确实很难一次性写出来。
+         //问题关键在于即便排序了--也只能确定当前是----得看一下时间复杂度怎么推的了---有意思啊
+        //也是快排吗---啊哈---就一直在大面积的那一方进行寻找---那时间复杂度还真难说。
+        if(nums.length==2){
+            if(nums[left]<nums[right]){
+                swap(nums,0,1);
+
+            }
+            return nums[k-1];
+        }
+           while((k-1)!=right||right==(nums.length-1)){
+               while (left<right) {
+                      while (nums[right] <= find && left < right) {
+                          right--;
+
+                      }
+                      while (nums[left] >= find && left < right) {
+                          left++;
+                      }
+                      if(right!=left){
+                     swap(nums,left,right);//交换
+
+                      }
+               }
+
+               swap(nums,m,right);
+               //接下来的循环就是从另一个较大的开始了
+               if(right>(k-1)){
+                   left=0;
+                   right-=1;
+               }
+               else if(right<(k-1)){
+                   right=nums.length-1;
+                   left+=1;
+               }
+               if(right==1){
+                   if(nums[left]<nums[right]){
+                       swap(nums,0,1);
+
+                   }
+                   return nums[k-1];
+               }
+               m=left;
+               find=nums[left];
+
+            }
+
+        return  nums[k-1];
+
+
+
+        /**    就只能看题解了，想法和正确的还是相去甚远
+         *  int find=nums[0];
            //时间复杂度o(n),那就空间换时间
            //用k作为索引
            //贪心啊这是---每次确定一个
@@ -44,9 +105,12 @@ public class Solution {
         }
 
            return  find;
+         */
     }
 
     public static void main(String[] args) {
-
+        int[] arr=new int[]{-1,2,0};
+        int m=findKthLargest(arr,3);
+        System.out.println(m);
     }
 }
