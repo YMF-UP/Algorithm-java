@@ -26,31 +26,42 @@ public class Solution {
         int privot=0;
         int value=nums[0];//一开始的
         while (true) {
-            while (left < right) {
-                while (value >= nums[right] & left < right) {
-                    right--;
+            int i=left;
+            int j=right;
+            //还错---我麻了--不知道问题在哪儿--debug也不对啊，---交换发生问题了,那就还是边界问题了
+            //擦--超时了
+            while (i < j) {
+                while (value >= nums[j] && i < j) {
+                    j--;
                 }
-                while (value <= nums[left] & left < right) {
-                    left++;
+                while (value <= nums[i] && i < j) {
+                    i++;
                 }
-                if (left < right) {
-                    swap(nums, left, right);
+                if (i < j) {
+                    swap(nums, i, j);
                 }
                 //知道为什么之前一直纠结于那个判断条件了---因为我带入快排的话--要一直循环才能确定最终枢纽位置
                 //但是这个有点变化在于两者相等是最终条件---但我记得deep seek给了一个很新的--回来再看吧
                 //问题来了，这要如何判断枢纽呢？--不对也要加一个循环---while (left<right)---但是right和left会改变所以循环会存在---或者说用一个true
+
+                /**就用这个注释一下吧，错误点
+                 * 1.枢纽不重要--这就是和快排的区别---最重要的是区间--不能既要又要啊--但还是要交换最后的，确定最终位置
+                 * 2.时间复杂度还是有点没分析明白--之前考研的时候还是都仔细看了得--还是没有亲手去做啊
+                 * 3.我记得既有那种非常简洁的又有这种多层循环的，ai给的
+                 * 4.left和right要改变---区间作用只有--不参与具体的加减--那和这个有啥区别呢，需要单独的i和j吗*/
             }
-            privot=right;//方便看和记录--用right或left的话容易混
+            swap(nums,left,j);
+            privot=j;//方便看和记录--用right或left的话容易混
+            /**关键点在这个是吧，看来我还真需要想一想了，对比一下了，git的优势展现出来了
+             * point：区间
+             * 果然是这个问题，要不要提交一下
+             * */
             if (privot==(k-1)){
                 return nums[privot];
             } else if (privot>(k-1)) {
                right-=1;
-               left=0;
-
             } else if (privot<(k-1)) {
                 left+=1;
-                right=nums.length-1;
-
             }//好像又不对,这样都得改一下啊---还是我搞混了快排的枢纽吗？--这个和枢纽没关系吗难道？---那不会了
             value=nums[left];
 
@@ -147,8 +158,11 @@ public class Solution {
     }
 
     public static void main(String[] args) {
-        int[] arr=new int[]{-1,2,0};
-        int m=findKthLargest(arr,3);
-        System.out.println(m);
+        int[] arr=new int[]{3,2,3,1,2,4,5,5,6};
+        int m=findKthLargest(arr,4);
+        for(int i:arr){
+            System.out.println(i);
+        }
+        System.out.println("key "+m);
     }
 }
