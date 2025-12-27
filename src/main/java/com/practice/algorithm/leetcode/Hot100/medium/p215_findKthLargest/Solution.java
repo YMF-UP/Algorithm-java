@@ -59,9 +59,9 @@ public class Solution {
             if (privot==(k-1)){
                 return nums[privot];
             } else if (privot>(k-1)) {
-               right-=1;
+               right=privot-1;
             } else if (privot<(k-1)) {
-                left+=1;
+                left=privot+1;
             }//好像又不对,这样都得改一下啊---还是我搞混了快排的枢纽吗？--这个和枢纽没关系吗难道？---那不会了
             value=nums[left];
 
