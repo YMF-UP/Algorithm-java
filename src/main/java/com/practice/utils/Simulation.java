@@ -4,8 +4,11 @@ public class Simulation {
 
     public static void main(String[] args) {
 
-        int m=1/3;
-        System.out.println(m);
+        int[] m={3,2,1,5,6,4};
+        for(int i :m){
+            System.out.println(i);
+        }
+
        /* int [] nums=new int [26];
         char [] S=new char[26];
         char [] s=new char[26];
