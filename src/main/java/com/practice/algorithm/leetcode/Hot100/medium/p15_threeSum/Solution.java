@@ -25,13 +25,18 @@ public class Solution {
         //怎么去重啊---重复的关键在于有可能走到一样的
         for (int i = 0; i < nums.length-2; i++) {
             int right=nums.length-1;
-            if(i>0){
+            if(i>0)
+            {
             if(nums[i]==nums[i-1])
-                continue;}
+                continue;
+            }
             for (int left = i+1; left <right ; ) {
                /* int m=0-nums[left]-nums[i];
                 if () {
                 }*/
+                if(left>(i+1)&&nums[left]==nums[left-1]){
+                    continue;
+                }
                 int k=nums[left]+nums[right]+nums[i];
                    if(k==0){
                        sum.add(Arrays.asList(nums[left], nums[right], nums[i]));
