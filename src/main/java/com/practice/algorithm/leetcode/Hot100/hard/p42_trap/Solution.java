@@ -6,16 +6,65 @@ public class Solution {
 
         if(height.length<3)
             return  0;
-        //最重要的是左右边界
-        //双指针好像很简单啊---但是要遍历每一根柱子吗--还是区域重要
-        //但是每一个都要遍历不就太复杂了吗---时间复杂度---怎么降低的呢？
-        //好像有点懂了---左右边界为主---左右指针---只有小于左右边界才可以计算
-        //到边界的时候怎么办---这个确实有点不知道怎么处理---也是继续寻找边界
+        ///最重要的是左右边界
+        ///双指针好像很简单啊---但是要遍历每一根柱子吗--还是区域重要
+        ///但是每一个都要遍历不就太复杂了吗---时间复杂度---怎么降低的呢？
+        ///好像有点懂了---左右边界为主---左右指针---只有小于左右边界才可以计算
+        ///到边界的时候怎么办---这个确实有点不知道怎么处理---也是继续寻找边界
         int left=0;
         int right=2;
         int sum=0;
-        //突然感觉这个做法和之前一样了，哈哈--还是不对--但有点接近了感觉
+        int flag=height[right];
+        int m=2;
+        //先找左右两边的最大值---应该右边就行了---左边应该要跟着走
+        while (right<height.length){
+            if(flag<height[right]){
+                flag=height[right];
+                m=right;
+            }
+            right++;
+        }
+        right=m;
         for (int i = 1; i < height.length-1; ) {
+            if (height[i]<height[right]&&height[i]<height[left]){
+                int h= Math.min(height[right],height[left]);
+                sum+=h-height[i];
+                i++;
+            } else if (height[i]>=height[left]) {
+               left=i;
+               i++;
+                }
+             if (i>=right) {
+                 if(i==height.length-1)
+                     return sum;
+                 int b=0;//标记
+                flag=height[right+1];
+                for (int j = right+2; j < height.length; j++) {
+                    if(flag<=height[j]){
+                        flag=height[j];
+                        right=j;
+                        b=1;
+                    }
+                }
+                if(b==0){
+                    right++;
+                }
+            }else if(height[i]>=height[right]){
+                 i++;
+             }
+
+        } //也不对啊---也要找右边最大啊，擦--那太麻烦了吧--真是这样写吗？
+
+
+
+
+
+
+
+
+        ///突然感觉这个做法和之前一样了，哈哈--还是不对--但有点接近了感觉
+/**
+  for (int i = 1; i < height.length-1; ) {
             while (i<=left)
                 i++;
             while (right<=i)
@@ -40,7 +89,7 @@ public class Solution {
                     right++;
                 }
             }
-        }
+        }*/
      return  sum;
 
 
@@ -121,7 +170,7 @@ public class Solution {
     }
 
     public static void main(String[] args) {
-        int [] nu={0,1,0,2,1,0,1,3,2,1,2,1};
+        int [] nu={4,2,3};
         int m=trap(nu);
         System.out.println(m);
     }
