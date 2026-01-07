@@ -167,7 +167,7 @@ public class Solution {
 
 
     public static void main(String[] args) {
-        String s="abba";
+        String s="abcabcabc";
         int m=lengthOfLongestSubstring(s);
     }
 }
