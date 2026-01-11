@@ -62,6 +62,8 @@ public class Solution {
         String min="";
         char [] need=new char[26];
         char [] window=new char[26];
+        int [] flag=new int[s.length()];
+        int index=0,j=0;
         /// 这两个是有问题的---好好想想
 //        Arrays.fill(need,'0');
 //        Arrays.fill(window,'0');
@@ -74,6 +76,7 @@ public class Solution {
              char m=s.charAt(right);
              right++;
              if(need[m]!='0'){
+                 flag[index++]=right;
                  window[m]++;
              if(window[m]<=need[m]){
                  differ--;
@@ -85,7 +88,7 @@ public class Solution {
                      min=s.substring(left,right);
                  }
                  char k=s.charAt(left);
-                 left++;
+                 left=flag[j++];
                  //存在的时候怎么处理来着---判断是否合适
                  if(need[k]!=0){
                   if(window[k]==need[k]){
