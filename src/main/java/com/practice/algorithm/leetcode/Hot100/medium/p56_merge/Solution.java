@@ -14,7 +14,7 @@ public class Solution {
         boolean merged=false;
         Arrays.fill(flagMerge,0);
         for (int i = 0; i< row; i++)
-        {   merged=false;
+        {
             if(flagMerge[i]==0){
             //然后就是遍历了---遍历的是行不是列--先行后列
             for (int j = i+1; j <row ; j++) {
@@ -30,21 +30,50 @@ public class Solution {
                     intervals[i][0]=Math.min(intervals[i][0],intervals[j][0]);
                     intervals[i][1]=Math.max(intervals[i][1],intervals[j][1]);
                     flagMerge[j]=-1;
-                    merged=true;
+                    j=i;
                   }
               }
             }
-            if(merged){
+
             array[index][0]=intervals[i][0];
             array[index][1]=intervals[i][1];
             index++;
                 flagMerge[i]=-1;
-            }
+
          }
 
         }
 
         return Arrays.copyOf(array, index);
+
+
+       /* class Solution {
+            public int[][] merge(int[][] intervals) {
+                if (intervals.length == 0) {
+                    return new int[0][2];
+                }
+                Arrays.sort(intervals, new Comparator<int[]>() {
+                    public int compare(int[] interval1, int[] interval2) {
+                        return interval1[0] - interval2[0];
+                    }
+                });
+                List<int[]> merged = new ArrayList<int[]>();
+                for (int i = 0; i < intervals.length; ++i) {
+                    int L = intervals[i][0], R = intervals[i][1];
+                    if (merged.size() == 0 || merged.get(merged.size() - 1)[1] < L) {
+                        merged.add(new int[]{L, R});
+                    } else {
+                        merged.get(merged.size() - 1)[1] = Math.max(merged.get(merged.size() - 1)[1], R);
+                    }
+                }
+                return merged.toArray(new int[merged.size()][]);
+            }
+        }
+
+        作者：力扣官方题解
+        链接：https://leetcode.cn/problems/merge-intervals/solutions/203562/he-bing-qu-jian-by-leetcode-solution/
+        来源：力扣（LeetCode）
+        著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。*/
     }
 
 
