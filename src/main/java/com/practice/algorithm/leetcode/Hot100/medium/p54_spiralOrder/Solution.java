@@ -67,8 +67,9 @@ public class Solution {
         int i=0,j=0;
         int m=matrix.length;
         int n=matrix[0].length;
-        for (int k = 1; k <m*n ; k--) {
-            // 具体处理--但是怎么确定这个方向的加减呢?---怎么往下走呢?---所以Dir方向是开始又是增加的
+        for (int k = 0; k <m*n ; k++) {
+
+           /* // 具体处理--但是怎么确定这个方向的加减呢?---怎么往下走呢?---所以Dir方向是开始又是增加的
             // 怎么知道是行还是列变化呢?---dir决定的---好像有点问题这个判断条件
             while (i>=0&&i<m&&j>=0&&j<n&&matrix[i][j]!=Integer.MAX_VALUE){
               res.add(matrix[i][j]);
@@ -82,7 +83,17 @@ public class Solution {
             dir++;
             dir%=4;
             i+=Dir[dir][0];
+            j+=Dir[dir][1];*/
+            res.add(matrix[i][j]);
+            matrix[i][j]=Integer.MAX_VALUE;
+            int nexti=i+Dir[dir][0];
+            int nextj=j+Dir[dir][1];
+            if (nexti<0||nexti>=m||nextj<0||nextj>=n||matrix[nexti][nextj]==Integer.MAX_VALUE){
+                dir=(dir+1)%4;
+            }
+            i+=Dir[dir][0];
             j+=Dir[dir][1];
+
         }
         return res;
     }
