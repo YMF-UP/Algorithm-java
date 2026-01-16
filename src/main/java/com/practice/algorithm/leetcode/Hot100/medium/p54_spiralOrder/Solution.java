@@ -16,8 +16,8 @@ import java.util.List;
 
 public class Solution {
 
-    public List<Integer> spiralOrder(int[][] matrix) {
-        List<Integer> list=new ArrayList<>();
+    public static List<Integer> spiralOrder(int[][] matrix) {
+     /*   List<Integer> list=new ArrayList<>();
         // 碰到尽头就转弯---重点就是尽头---其实就是每转两次弯一次就少一个，除了第一次
         // 特殊处理第一行
         for (int i = 0; i < matrix[0].length; i++) {
@@ -36,13 +36,13 @@ public class Solution {
         int statueList=matrix[0].length-1;
         while (flagRow!=0&&flagList!=0){
             if(k%2!=0){
-               /* for (int i = statueRow; i <=flagRow; i++) {
+               *//* for (int i = statueRow; i <=flagRow; i++) {
                     list.add(matrix[i][statueList]);
                 }
                 statueList++;
                 for (int j = statueList; j>=flagList; j--) {
                         list.add(matrix[flagRow][j]);
-                }*/
+                }*//*
                 for (  ; statueRow <=flagRow ; statueRow++) {
                     list.add(matrix[statueRow][statueList]);
                 }
@@ -59,8 +59,37 @@ public class Solution {
             }
 
         }
+        return list;*/
+        ///  还是想不到啊怎么--有时候是差一点--有时候差了好多
+        List<Integer> res=new ArrayList<>();
+        int Dir[][] ={{0,1},{1,0},{0,-1},{-1,0}};//这个确实挺牛的
+        int dir=0;
+        int i=0,j=0;
+        int m=matrix.length;
+        int n=matrix[0].length;
+        for (int k = 1; k <m*n ; k--) {
+            // 具体处理--但是怎么确定这个方向的加减呢?---怎么往下走呢?---所以Dir方向是开始又是增加的
+            // 怎么知道是行还是列变化呢?---dir决定的---好像有点问题这个判断条件
+            while (i>=0&&i<m&&j>=0&&j<n&&matrix[i][j]!=Integer.MAX_VALUE){
+              res.add(matrix[i][j]);
+              matrix[i][j]=Integer.MAX_VALUE;
+              i+=Dir[dir][0];
+              j+=Dir[dir][1];
+              k++;
+            }
+            i-=Dir[dir][0];
+            j-=Dir[dir][1];
+            dir++;
+            dir%=4;
+            i+=Dir[dir][0];
+            j+=Dir[dir][1];
+        }
+        return res;
+    }
 
+    public static void main(String[] args) {
+        int ma[][]={{1,2,3},{4,5,6},{7,8,9}};
+        List<Integer> res=spiralOrder(ma);
 
-        return list;
     }
 }
