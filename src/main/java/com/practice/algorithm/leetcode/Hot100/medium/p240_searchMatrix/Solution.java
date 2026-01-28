@@ -51,7 +51,19 @@ public class Solution {
         }
         return  false;*/
 
+      /**  int row = matrix.length - 1;
+        int col = 0;  // 建议改为 col 而不是 list，更清晰
 
+        while (row >= 0 && col < matrix[0].length) {
+            if (matrix[row][col] == target) {
+                return true;
+            } else if (matrix[row][col] < target) {
+                col++;  // 当前值太小，右移（增大）
+            } else {
+                row--;  // 当前值太大，上移（减小）
+            }
+        }
+        return false;*/
 
     }
 
