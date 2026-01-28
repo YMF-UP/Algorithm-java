@@ -15,6 +15,27 @@ public class Solution {
              }
          }*/
 
+        //先对折然后再对称翻转---好处在于下标方便处理---是的,这个最重要
+        //从对角线开始进行下去--然后竖着对称翻转
+        int n=matrix.length;
+        //对角线
+        for (int i = 0; i < n; i++) {
+            for (int j = i+1; j < n; j++) {
+                int temp=matrix[i][j];
+                matrix[i][j]=matrix[j][i];
+                matrix[j][i]=temp;
+            }
+        }
+        //翻转--从中间位置开始
+        //奇数行和偶数行的不一样处理吗?--当然了,一个不变一个改变--中间行--不用不用,从两端开始就行了
+        for (int i = 0; i <n; i++) {
+            int m=n-1;
+            for (int j = 0; j < m; j++,m--) {
+                int temp=matrix[i][j];
+                matrix[i][j]=matrix[i][m];
+                matrix[i][m]=temp;
+            }
+        }
 
 
     }
