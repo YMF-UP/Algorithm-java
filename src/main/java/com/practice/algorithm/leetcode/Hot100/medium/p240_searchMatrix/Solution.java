@@ -28,7 +28,7 @@ public class Solution {
 
         return false;*/
 
-        // 关键就是一次剔除一行或者一列按照左下角--右上角这种--不停的缩小范围--只考虑角落,复杂度自然就低
+      /**  // 关键就是一次剔除一行或者一列按照左下角--右上角这种--不停的缩小范围--只考虑角落,复杂度自然就低
         // 肯定能剔除一行或者一列--如果左下角小于就移动,直到大于--然后移动右上角--明白了无论大于小于都可以移动右上角
         // 不对不对,左下角也是可以的---就大于的话就排除行,小于就排除列,没错都一样的
         int row= matrix.length-1;
@@ -42,11 +42,16 @@ public class Solution {
             while (list<matrix[0].length&&matrix[row][list]<target){
                 list++;
             }
+            if (list >= matrix[0].length) {
+                 return false;
+             }
             while (row>=0&&matrix[row][list]>target){
                 row--;
             }
         }
-        return  false;
+        return  false;*/
+
+
 
     }
 
