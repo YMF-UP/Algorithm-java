@@ -39,7 +39,7 @@ public class Soluion {
         ListNode ftNode=head;
         ListNode sdNode=head.next;
 
-
+        ftNode.next=null;
         while (sdNode!=null) {
             ListNode tdNode = sdNode.next;
             sdNode.next=ftNode;
@@ -51,7 +51,7 @@ public class Soluion {
         //迭代是怎么用呢？
 
 
-        return head;
+        return ftNode;
     }
 
 }
