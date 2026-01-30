@@ -14,6 +14,35 @@ package com.practice.algorithm.leetcode.Hot100.easy.p206_reverseList;
 
 public class Soluion {
 
+    public ListNode reverse(ListNode node){
+        ListNode newNode;
+        if(node.next!=null&&node!=null){
+            newNode=reverse(node.next);
+            ListNode f=node.next;
+            f.next=node;
+            node.next=null;
+            return newNode;
+        }
+        else {
+            return node;
+        }
+      /*  // 1. 基准条件（处理 null 和尾节点）
+        if (node == null || node.next == null) {
+            return node;
+        }
+
+        // 2. 递归（不需要提前声明 newNode）
+        ListNode newHead = reverse(node.next);
+
+        // 3. 反转当前这对指针
+        node.next.next = node;
+        node.next = null;
+
+        // 4. 层层上报新头
+        return newHead;*/
+
+    }
+
       public class ListNode {
           int val;
           ListNode next;
@@ -36,7 +65,8 @@ public class Soluion {
         if(head==null){
             return  head;
         }
-        ListNode ftNode=head;
+
+      /**  ListNode ftNode=head;
         ListNode sdNode=head.next;
 
         ftNode.next=null;
@@ -46,12 +76,12 @@ public class Soluion {
             ftNode=sdNode;
             sdNode=tdNode;
         }
-
+        */
 
         //迭代是怎么用呢？
-
-
-        return ftNode;
+        //其实是递归--上面那个是迭代
+        ListNode node=reverse(head);
+        return node;
     }
 
 }
