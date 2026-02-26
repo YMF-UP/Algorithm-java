@@ -57,7 +57,7 @@ public class Solution {
 				cur[j++]=now;
 			}
 			if(i<lists.length){
-				cur[j]=lists[i+1];
+				cur[j]=lists[i];
 			}
 			lists=cur;
 		}
