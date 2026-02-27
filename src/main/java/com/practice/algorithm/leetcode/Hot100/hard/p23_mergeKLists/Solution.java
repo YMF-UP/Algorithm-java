@@ -63,6 +63,51 @@ public class Solution {
 		}
 		/// 感觉可以用递归来做---但是要写新函数了--毕竟要传当前的归并起点下标
         return lists[0];
-
 	}
+
+
+
+
+
+
+	/*class Solution {
+		public ListNode mergeKLists(ListNode[] lists) {
+			if (lists == null || lists.length == 0) return null;
+			return mergeK(lists, 0, lists.length - 1); // 初始下发任务：0 到 末尾
+		}
+
+		// 【核心分治函数】
+		private ListNode mergeK(ListNode[] lists, int left, int right) {
+			// 1. Base Case (终止条件：只剩一个抽屉)
+			if (left == right) {
+				return lists[left]; // 直接原样返回仓库里的东西，不用存！
+			}
+
+			// 2. Recursive Step (找中点，分派给两个下属)
+			int mid = left + (right - left) / 2; // 防溢出的标准写法
+			ListNode l1 = mergeK(lists, left, mid);      // 下属A去拿左边的结果
+			ListNode l2 = mergeK(lists, mid + 1, right); // 下属B去拿右边的结果
+
+			// 3. Logic (汇总：把下属拿回来的两条链表合并)
+			return merge(l1, l2); // 这里的 merge 就是力扣 21 题（合并两个有序链表）
+		}
+
+		// 这个是你早就写对的黑盒，一字不改
+		private ListNode merge(ListNode l1, ListNode l2) {
+			ListNode dummy = new ListNode(0);
+			ListNode cur = dummy;
+			while (l1 != null && l2 != null) {
+				if (l1.val < l2.val) {
+					cur.next = l1;
+					l1 = l1.next;
+				} else {
+					cur.next = l2;
+					l2 = l2.next;
+				}
+				cur = cur.next;
+			}
+			cur.next = (l1 != null) ? l1 : l2;
+			return dummy.next;
+		}
+	}*/
 }
