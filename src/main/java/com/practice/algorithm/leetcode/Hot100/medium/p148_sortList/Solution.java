@@ -69,7 +69,7 @@ public class Solution {
 		//但是好像很难递归
 		ListNode  middle=medium(head);//找中间位置
 		return dummy;*/
-		/// 归并算法处理链表的排序--或者说归并处理的就是链表
+		/*/// 归并算法处理链表的排序--或者说归并处理的就是链表
 		/// 题解分了迭代和递归---我还真有点懵--而且我看题解还挺长的
 		/// 递归好像更好理解一些---一直分两段直到只剩一个--返回后怎么做(这个就是我困扰的点)
 		/// 一层左一层右--像二叉树一样--先走左,后返回到父节点走右--感觉像是简单的中序遍历啊
@@ -81,6 +81,79 @@ public class Solution {
 		middle.next=null;
         ListNode left=sortList(head);
 		/// 然后开始合并--从1个数开始也就是返回到父节点--就是返回这个有点不太懂怎么处理,还是逻辑问题吗?
-		return merge(left,right);
+		return merge(left,right);*/
+
+		/// 迭代也是要分开--但是放到哪里呢--或者说怎么常数个空间复杂度--合并好的放在哪里啊?
+		/// 逐渐有序的一个过程也是--也要裂成一个的时候,毕竟只有这个的时候才开始有序--但就是怎么参与之后的归并呢?
+		/// 卡住了,确实卡住了
+		if (head == null || head.next == null)
+			return head;
+		int lean=0;
+		/// 先确定一下长度吗?
+		ListNode dummy=new ListNode(0);
+		dummy.next=head;
+		ListNode temp=head;
+		while (temp!=null){
+			temp=temp.next;
+			lean++;
+		}
+
+        /// 这个对吗,应该是要传两个链表--因为要调用合并的话
+		/// 按照interval来确定合并的链表--但是必须要两个啊?--这个怎么处理
+		for (int interval=1; interval < lean; interval*=2) {
+			/*这个内层循环不对
+			for (int j = 0; j < interval; j++) {
+
+			}*/
+			ListNode cur=dummy.next;
+			ListNode pre=dummy;//这个有点不太懂---为什么要设置这一个
+			while (cur!=null){
+				/* 完全错误啊--我吐了,怎么能蠢到这种程度
+				ListNode left=pre;
+				/// 走步长啊--要写两个for吗?
+			    /// 让cur走吗?
+				for (int i = 0; i < interval; i++) {
+                      pre=pre.next;
+				}
+				ListNode node;
+				node=pre;
+				pre=pre.next;
+				node.next=null;
+				ListNode righ=pre;
+				for (int j = 0; j < interval; j++) {
+                     pre=pre.next;
+				}
+				node=pre;
+				pre=pre.next;
+				node.next=null;*/
+				ListNode left=cur;
+				for (int i = 0; i < interval-1&&cur.next!=null; i++) {
+					cur=cur.next;
+				}
+				ListNode right=cur.next;
+				cur.next=null;
+				cur=right;
+				for (int j = 0; j < interval-1&&cur!=null&&cur.next!=null; j++) {
+					cur=cur.next;
+				}
+				ListNode next=null;
+				if (cur!=null){
+					next=cur.next;
+					cur.next=null;
+				}
+				/// 感觉还差了一步--就在这里
+			    /// 差一个衔接的
+			   /*不对,怎么能这么想呢--pre不可能这么连接的
+			    ListNode node=null;
+				node.next=merge(left,right);
+                pre.next=node.next;*/
+				pre.next=merge(left,right);
+				while (pre.next!=null){
+					pre=pre.next;
+				}
+				cur=next;
+			}
+		}
+        return  dummy.next;
 	}
 }
