@@ -67,7 +67,7 @@ public class Solution {
 		   //要更新了,访问的要放到最前面了
 		   //但是哈希怎么做到顺序啊,就像链表怎么随取一样。
 		   //放到最前面
-			if(cache.getOrDefault(key,new Node())!=null){
+			if(cache.get(key)!=null){
 				Node exit=cache.get(key);
 				remove(exit);
 				add(exit);
@@ -89,10 +89,11 @@ public class Solution {
 
              }*/
 			Node cur=new Node(key,value);
-			if(cache.getOrDefault(key,cur)!=null){
+			if(cache.get(key)!=null){
 				/// 放到最前面--然后踢出去
 			    /// 好像不太对啊--无论是先踢出去还是先插进来好像都改变了pre和next--先踢走可以
 			    Node in=cache.get(key);
+				in.value=value;
 			    remove(in);
 				add(in);
 			}else{
@@ -100,18 +101,29 @@ public class Solution {
 				if(cache.size()==cap){
 					///踢出去最后的然后头插法
 				    ///先插然后踢出去
-					add(cur);
-					cache.put(key,cur);
+
+				   /// 应该先踢出去再插进来
+					Node last=dummy.pre;
+					remove(last);
+					cache.remove(last.key);
+
+					/**
 					/// 踢出去最后一个
+
 				   /// 只有一个dummy的话怎么找最后一个--dummy的pre指向的就是最后一个,真是逻辑完备啊
 				    Node last=dummy.pre;
 					remove(last);
 					cache.remove(last.key);
-				}else {
+					 */
+				}
+				add(cur);
+				cache.put(key,cur);
+				/*///这个else多余了
+				   else {
                     /// 还是头插法
 					add(cur);
 					cache.put(key,cur);
-				}
+				}*/
 
 			}
 
