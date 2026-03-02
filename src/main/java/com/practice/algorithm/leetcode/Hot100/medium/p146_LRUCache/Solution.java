@@ -1,7 +1,7 @@
 package com.practice.algorithm.leetcode.Hot100.medium.p146_LRUCache;
 
 
-import java.nio.channels.Pipe;
+
 import java.util.HashMap;
 
 /**
@@ -17,23 +17,24 @@ import java.util.HashMap;
 
 public class Solution {
 
-	public class Node{
-		public int key;
-		public int value;
-		public Node pre;
-		public Node next;
-		public Node(int key,int value){
-			this.key=key;
-			this.value=value;
-		};
-		public Node(){
 
-		};
-
-	}
     //10:41
 	//我看标签写的是哈希和双向链表
 	class LRUCache {
+	    private class Node{
+		    public int key;
+		    public int value;
+		    public Node pre;
+		    public Node next;
+		    public Node(int key,int value){
+			    this.key=key;
+			    this.value=value;
+		    };
+		    public Node(){
+
+		    };
+
+	    }
         //LRU我记得挺有意思的--但是我记得是用栈来写啊
 	    //没给链表定义，要重写吗?--但是能看出来吗?--不是用链表写吧
 	    //LRU的本质就是替换--头插法就是,但是这个少了一点自动更新--就是只有put才能更新
