@@ -26,18 +26,18 @@ public class Solution {
 		 root.left=midTo(root,left,mid-1);//左子树
 		 root.right=midTo(root,mid+1,right);//右子树
 		 return root;*/
-		 if(left>right){
+		 if(left==right){
 			 return null;
 		 }
 		 int mid=left+(right-left)/2;
 		 TreeNode node=new TreeNode(nums[mid]);
-		 node.left=midTo(nums, left,mid-1);//左子树
+		 node.left=midTo(nums, left,mid);//左子树
 		 node.right=midTo(nums,mid+1,right);//右子树
 		 return node;
 	 }
 
 	public TreeNode sortedArrayToBST(int[] nums) {
-		int left=0,right=nums.length-1;
+	/*	int left=0,right=nums.length-1;
 		int mid=left+(right-left)/2;
 		TreeNode root=new TreeNode(nums[mid]);
          //升序或者降序都好写,因为误差不超过一个,也就是不超过平衡二叉树的定义
@@ -45,6 +45,7 @@ public class Solution {
 	     //这是个递归--因为需要一直找中间节点---root的左右其实都是分开的中间节点
 		root.left=midTo(nums, left,mid-1);//左子树
         root.right=midTo(nums,mid+1,right);//右子树
-		return root;
+		return root;*/
+		return midTo(nums,0,nums.length);
 	}
 }
