@@ -17,7 +17,7 @@ import com.practice.algorithm.model.TreeNode;
 
 public class Solution {
 
-	private boolean dfs(TreeNode root,int val){
+	/*private boolean dfs(TreeNode root,int val){
 		if(root.left==null&&root.right==null){
 			if(root.val>=val){
 				return false;
@@ -32,13 +32,47 @@ public class Solution {
 		if(root.right!=null){
 		 right=dfs(root.right,root.val);
 		}
-		return left&&right;
+		return left&&!right;
 
+	}*/
+	private boolean dfsLeft(TreeNode root,int val){
+		if(root.left==null&&root.right==null){
+			if(root.val>=val){
+				return false;
+			}else {
+				return  true;
+			}
+		}
+		boolean left=true,right=true;
+		if(root.left!=null){
+			left=dfsLeft(root.left,root.val);
+		}
+		if(root.right!=null){
+			right=dfsRight(root.right,root.val);
+		}
+		return left&&right;
 	}
+	private boolean dfsRight(TreeNode root,int val){
+		if(root.left==null&&root.right==null){
+			if(root.val<=val){
+				return false;
+			}else {
+				return  true;
+			}
+		}
+		boolean left=true,right=true;
+		if(root.left!=null){
+			left=dfsLeft(root.left,root.val);
+		}
+		if(root.right!=null){
+			right=dfsRight(root.right,root.val);
+		}
+		return left&&right;
+	}
+
 
 	public boolean isValidBST(TreeNode root) {
          //要依赖于前一个的中序遍历得到的数值
-         return dfs(root,root.val);
-
+         return dfsLeft(root.left,root.val)&&dfsRight(root.right,root.val);
 	}
 }
