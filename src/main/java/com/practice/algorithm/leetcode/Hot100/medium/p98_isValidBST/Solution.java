@@ -35,7 +35,7 @@ public class Solution {
 		return left&&!right;
 
 	}*/
-	private boolean dfsLeft(TreeNode root,int val){
+	/*private boolean dfsLeft(TreeNode root,int val){
 		if(root.left==null&&root.right==null){
 			if(root.val>=val){
 				return false;
@@ -68,11 +68,22 @@ public class Solution {
 			right=dfsRight(root.right,root.val);
 		}
 		return left&&right;
-	}
+	}*/
+	private int pre;
+	private boolean dfs(TreeNode root){
+		//1.怎么判断终止条件,怎么返回?
+		if(root==null){
+			return true;
+		}
+		//2.应该是要在进入右子树前开始判断--但是刚开始pre是不存在具体值的
 
+		dfs(root.left);
+
+		dfs(root.right);
+	}
 
 	public boolean isValidBST(TreeNode root) {
          //要依赖于前一个的中序遍历得到的数值
-
+        return dfs(root);
 	}
 }
