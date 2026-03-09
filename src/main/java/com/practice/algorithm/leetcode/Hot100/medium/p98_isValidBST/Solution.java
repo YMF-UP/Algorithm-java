@@ -69,7 +69,7 @@ public class Solution {
 		}
 		return left&&right;
 	}*/
-	private int pre;
+	private long pre= Long.MIN_VALUE;
 	private boolean dfs(TreeNode root){
 		//1.怎么判断终止条件,怎么返回?
 		if(root==null){
@@ -77,9 +77,13 @@ public class Solution {
 		}
 		//2.应该是要在进入右子树前开始判断--但是刚开始pre是不存在具体值的
 
-		dfs(root.left);
-
-		dfs(root.right);
+		boolean leftFlag=dfs(root.left);
+		if(pre>=root.val){
+			return false;
+		}
+         pre=root.val;
+		boolean rightFlag=dfs(root.right);
+		return leftFlag&&rightFlag;
 	}
 
 	public boolean isValidBST(TreeNode root) {
