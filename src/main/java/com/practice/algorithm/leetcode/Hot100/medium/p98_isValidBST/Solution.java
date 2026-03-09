@@ -73,6 +73,6 @@ public class Solution {
 
 	public boolean isValidBST(TreeNode root) {
          //要依赖于前一个的中序遍历得到的数值
-         return dfsLeft(root.left,root.val)&&dfsRight(root.right,root.val);
+
 	}
 }
