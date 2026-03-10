@@ -2,6 +2,8 @@ package com.practice.algorithm.leetcode.Hot100.medium.p98_isValidBST;
 
 import com.practice.algorithm.model.TreeNode;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 
 /**
@@ -88,6 +90,27 @@ public class Solution {
 
 	public boolean isValidBST(TreeNode root) {
          //要依赖于前一个的中序遍历得到的数值
-        return dfs(root);
+		Deque<TreeNode> stack=new ArrayDeque<>();//栈
+		//栈的中序遍历
+		long flag=Long.MIN_VALUE;
+		boolean is=true;
+		while (root!=null||!stack.isEmpty()){
+			if(root!=null){
+				stack.push(root);
+				root=root.left;
+			}else {
+				root=stack.pop();
+				if(flag>=root.val){
+					return false;
+				}
+				flag=root.val;
+				root=root.right;
+			}
+		}
+		return  is;
+//        return dfs(root);
+
+
+
 	}
 }
