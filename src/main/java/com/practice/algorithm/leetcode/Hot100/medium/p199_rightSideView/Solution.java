@@ -2,7 +2,9 @@ package com.practice.algorithm.leetcode.Hot100.medium.p199_rightSideView;
 
 import com.practice.algorithm.model.TreeNode;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 
 
@@ -19,7 +21,7 @@ import java.util.List;
 
 public class Solution {
 
-
+	private List<Integer> result=new ArrayList<>();
 	public List<Integer> rightSideView(TreeNode root) {
         /** 不对--看清楚这个例子
          *  [1,null,2,null,5,4,6,3]
@@ -62,5 +64,39 @@ public class Solution {
 			}
 		}
 		return result;*/
+
+		if(root==null){
+			return result;
+		}
+		//递归很难做啊--要考虑深度啊主要是
+//		dfs(root);
+        //看了题解--就是层序遍历
+		//不过这个层序遍历似乎要多考虑一下--而不是全都放进去
+		//从size角度考虑,只弹出一个吗?
+		Deque<TreeNode> deque=new ArrayDeque<>();
+		deque.push(root);
+		while (!deque.isEmpty()){
+			int k=deque.size();
+			for (int i = 0; i < k; i++) {
+				root=deque.pop();
+				if(i==0){
+					result.add(root.val);
+				}
+				if(root.right!=null){
+					deque.add(root.right);
+				}
+				if(root.left!=null){
+					deque.add(root.left);
+				}
+			}
+
+		}		return result;
 	}
+	/*private void dfs(TreeNode root){
+		if(root==null){
+			return;
+		}
+		dfs(root.right);
+
+	}*/
 }
