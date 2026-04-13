@@ -66,7 +66,7 @@ public class Solution {
 		TreeNode root=new TreeNode(preorder[start]);
 		int leftSize=index.get(preorder[start])-intL;
 		root.left=reset(start+1,start+leftSize,intL,preorder,index);
-        root.right=reset(start+leftSize+1,end,leftSize+intL,preorder,index);
+        root.right=reset(start+leftSize+1,end,leftSize+intL+1,preorder,index);
 		return root;
 	}
 }
