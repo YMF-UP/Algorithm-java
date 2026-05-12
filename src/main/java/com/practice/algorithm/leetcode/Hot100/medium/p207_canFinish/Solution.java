@@ -1,7 +1,9 @@
 package com.practice.algorithm.leetcode.Hot100.medium.p207_canFinish;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * LeetCode .
@@ -15,7 +17,7 @@ import java.util.Arrays;
 
 public class Solution {
 
-	private static int find(int []rank,int i){
+	/*private static int find(int []rank,int i){
 
        if(find(rank,rank[i])==i){
 		return i;
@@ -57,5 +59,53 @@ public class Solution {
 			}
 		}
        return true;
+	}*/
+
+
+    //dfs和bfs都是可以的
+	//bfs是消减入度为
+	//dfs----三色法,就是标记--不太会,先试着回忆一下题解写这一个
+
+	// 怎么做
+	private static boolean dfs(List<Integer>[] graph,int[] color, int be){
+		color[be]=1;//正在
+        for (int cur:graph[be]){
+			//本质就还是寻找到了正在执行的,那为什么还需要2呢?
+	        if(color[cur]==1||color[cur]==0&&dfs(graph,color,cur)){
+				return true;//就还是说找到环了
+	        }
+        }
+		//什么时候置2,怎么判断是不是环
+		color[be]=2;//就是说这个既不是正在执行的,也不是以后可以执行的,排除掉
+		return false;
 	}
+
+
+	public boolean canFinish(int numCourses, int[][] prerequisites) {
+		///三色---为什么要引入一个第三色?
+
+		//先写邻接表吧
+		///List<int[]> graph=new ArrayList<>();//是这样吗?---相当于一个list类型里面是int数组--对吗?可以graph[i]吗?我这个有点不太懂了
+		List<Integer>[] graph=new ArrayList[numCourses];//这个才对,list数组,为什么是numCourses?
+		Arrays.setAll(graph,i->new ArrayList<>());
+		for (int [] cur:prerequisites){
+			int from=cur[1];
+			int to=cur[0];
+			graph[from].add(to);//有向---b指向a
+		}
+        //三色,0 1 2
+		int [] color =new int[numCourses];
+		Arrays.fill(color,0);
+		//开始遍历对应的组合---究竟是graph还是prerequisites---
+		for (int [] cur:prerequisites){
+		     /// color[cur[1]]=1;//作为开始 //似乎不应该放在这里
+			 //判断---怎能判断,去dfs它的指向,也就是深度递归这个方向
+			//怎么是算有环呢,0-1 1-2 2-0,怎么dfs呢?
+			 if(color[cur[1]]==0&&dfs(graph,color,cur[1])){
+                   return false;
+			 }
+		}
+		return true;
+	}
+
 }
