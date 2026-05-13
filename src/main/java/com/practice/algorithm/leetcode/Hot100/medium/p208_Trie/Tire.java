@@ -49,27 +49,32 @@ public class Tire {
 				cur.son[b]=new Node();
 	        }
 			cur=cur.son[b];
-			cur.end=true;
         }
+		cur.end=true;
 	}
 
 	public boolean search(String word) {
          //dfs还是哈希
 		 /// 都不是了--直接循环就行了--怪不得要一个布尔定义
-		Node cur=root;
-		for (char c:word.toCharArray()){
-			int b=c-'a';
-			if(!cur.son[b].end){
-				return false;
-			}
-			cur=cur.son[b];
-		}
-		return true;
+		return find(word)==2;
 	}
 
 	public boolean startsWith(String prefix) {
        //dfs
 		/// 这个和前面那个search有什么区别吗?---终止条件的不同吗?不是吧
-		return search(prefix);
+		return find(prefix)!=0;
 	}
+	private int find(String word){
+		Node cur=root;
+		for (char c:word.toCharArray()){
+			c-='a';
+            if(cur.son[c]==null){
+				return  0;
+            }
+			cur=cur.son[c];
+		}
+
+		return cur.end ?2 :1;
+	}
+
 }
