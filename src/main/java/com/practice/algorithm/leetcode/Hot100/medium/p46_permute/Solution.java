@@ -16,15 +16,15 @@ import java.util.List;
 
 public class Solution {
 
-	private static  void  dfs(List<List<Integer>> list,int [] nums,boolean []bool,int cur){
+	/*private static  void  dfs(List<List<Integer>> list,int [] nums,boolean []bool,int cur){
 		//应该是第一个位置 然后第二个位置这样一路下来
 		//也就是我回溯的点是回到当前位置进行更换,那需要一个boolen函数
 
 		//具体实现函数怎么写?
-		/*
+		*//*
 		  1.传当前数组下的具体下标数据nums[i]
 		  2.判断有没有访问,没有就进入,有就退出回溯回去继续
-		 */
+		 *//*
 		if(!bool[cur]){
 			return;
 		}
@@ -48,4 +48,38 @@ public class Solution {
         dfs(list,nums,bool,nums[0]);
 		return  list;
 	}
+*/
+
+	private static void dfs(List<List<Integer>> ans,List<Integer> path,boolean[] is,int n,int [] nums,int k){
+
+		if(k==n){
+			ans.add(new ArrayList<>(path));
+			return;
+		}
+		//for循环应该从哪里开始,从k还是都是0,从0开始,因为每一个都要进去成为一个排列
+		for (int i = 0; i < n; i++) {
+			if(!is[i]){
+				is[i]=true;
+				path.add(nums[i]);
+				dfs(ans,path,is,n,nums,k+1);
+				is[i]=false;
+				path.remove(path.size()-1);
+			}
+		}
+
+
+	}
+
+
+	public List<List<Integer>> permute(int[] nums) {
+        int n=nums.length;
+		List<List<Integer>> ans =new ArrayList<>();
+		List<Integer> path=new ArrayList<>();
+		boolean [] is=new boolean[n];
+		dfs(ans,path,is,n,nums,0);
+
+
+        return ans;
+	}
+
 }
