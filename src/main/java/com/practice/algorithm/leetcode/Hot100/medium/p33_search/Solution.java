@@ -27,6 +27,7 @@ public class Solution {
 			if(nums[mid]>=target){
                l=mid+1;
 			}
+
 			else {
                 r=mid-1;
 			}
