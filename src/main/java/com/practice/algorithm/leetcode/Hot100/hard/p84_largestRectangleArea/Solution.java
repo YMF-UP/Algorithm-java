@@ -5,7 +5,7 @@ import java.util.Deque;
 
 public class Solution {
 
-	public int largestRectangleArea(int[] heights) {
+	/*public int largestRectangleArea(int[] heights) {
 		///  标签是栈,但说实话,我第一次看到这个题目联想不到栈这个思路---这也算是一个提醒了看来
 		int max=0;
 		//这一题怎么说呢?--好像之前的接雨水和最大面积一样
@@ -24,6 +24,29 @@ public class Solution {
 		}
 
         return max;
+	}
+*/
+
+	public int largestRectangleArea(int[] heights) {
+		int max=0;
+		//是为了存一下当前的状态,没有确定左右边界之前
+		Deque<Integer> deque=new ArrayDeque<>();
+		int n=heights.length;
+		//三次遍历就好理解,往后的演变还是有点困难,我还是想搞懂一下,所以我想先写一下二次遍历
+
+		for (int i = 0; i < n; i++) {
+			int h=heights[i];
+			//大于等于的时候就出现边界了---这个是哪个边界?--第一个初始怎么判断
+			while (!deque.isEmpty()&&heights[deque.peek()]>=h){
+				//左边界变成peek()-1,有边界变成i.为什么呢?
+				//因为peek()前面那一个肯定是小于它的,不然就弹出了,右边界的话就是正常的这个
+				//但是初始第一个怎么搞?--先弹进去0下标吗?--不行吧--不会了
+
+			}
+			deque.push(i);
+		}
+
+		return max;
 	}
 
 }
