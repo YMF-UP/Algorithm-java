@@ -9,7 +9,9 @@ public class Solution {
 		//这个似乎更简单了,直接走一圈看看能不能匹配,和dp有关系吗?--这个就直接匹配,和之前状态有关系吗?
 		int n=s.length();
 		int i=0;
-		int k=n;
+		///我好像知道怎么做了--每一次匹配都算是一个状态,但是怎么回到之前的状态呢?
+		/// 我能想到的就是加一个循环--但这样不符合dp啊,看题解得了
+
 		while (i<n){
             int flag=i;
 			for (int j = 0; j < wordDict.size(); j++) {
