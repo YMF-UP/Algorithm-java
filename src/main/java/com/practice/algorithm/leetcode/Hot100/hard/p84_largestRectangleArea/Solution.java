@@ -60,7 +60,7 @@ public class Solution {
 
 	}*/
 
-	public int largestRectangleArea(int[] heights) {
+	/**public int largestRectangleArea(int[] heights) {
 
 		Deque<Integer> deque=new ArrayDeque<>();
 		int n=heights.length;
@@ -81,6 +81,38 @@ public class Solution {
 			max=Math.max((right[i]-left[i]-1)*heights[i],max);
 		}
 		return max;
+
+	}*/
+
+	public int largestRectangleArea(int[] heights) {
+
+		//想想怎么用一次遍历去做
+		//本质就是左右边界或者说端点
+		//二次遍历是计算端点和最后的值
+		//我能想起来--就是背下来了
+		Deque<Integer> deque=new ArrayDeque<>();
+		deque.push(-1);
+		int n=heights.length;
+		int right;
+		int[] left=new int [n];
+//		Arrays.fill(right,n);
+		for (int i = 0; i <= n; i++) {
+			int h=i==n ? -1 :heights[i];
+			//右端点不管怎么看都是遇到小于等于的,怎么退化呢?
+			//二次遍历之所以做不到就是right和left同一个节点下的左右端点不同步--要怎么解决呢?
+			//能很容易得到右端点,但是左端点怎么立刻得到--左端点就是第一个小它的
+			//模拟一下--如果一直变大,左端点就是-1了,如果变小再变大左端点已经记录过了
+			while (heights[deque.peek()]>=h){
+				deque.pop();
+				right=i;
+
+			}
+			left[i]=deque.peek();
+			deque.push(i);
+
+		}
+
+
 
 	}
 
