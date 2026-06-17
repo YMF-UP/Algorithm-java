@@ -1,6 +1,7 @@
 package com.practice.algorithm.leetcode.Hot100.hard.p84_largestRectangleArea;
 
 import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.Deque;
 
 public class Solution {
@@ -58,5 +59,29 @@ public class Solution {
 		//看来还是写不出来了--各种边界,好牛
 
 	}*/
+
+	public int largestRectangleArea(int[] heights) {
+
+		Deque<Integer> deque=new ArrayDeque<>();
+		int n=heights.length;
+		int[] left=new int[n];
+		int[] right=new int[n];
+		Arrays.fill(right,n);
+		for (int i = 0; i < n; i++) {
+			int h=heights[i];
+			while (!deque.isEmpty()&&heights[deque.peek()]>=h){
+				//这个是为什么?---或者说这么写对吗?右边一直是i吗?对的如果大的话直接就出来了
+				right[deque.pop()]=i;
+			}
+			left[i]=deque.isEmpty() ? -1 :deque.peek();
+			deque.push(i);
+		}
+		int max=0;
+		for (int i = 0; i < n; i++) {
+			max=Math.max((right[i]-left[i]-1)*heights[i],max);
+		}
+		return max;
+
+	}
 
 }
