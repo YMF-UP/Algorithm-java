@@ -27,26 +27,36 @@ public class Solution {
 	}
 */
 
-	public int largestRectangleArea(int[] heights) {
-		int max=0;
-		//是为了存一下当前的状态,没有确定左右边界之前
-		Deque<Integer> deque=new ArrayDeque<>();
-		int n=heights.length;
-		//三次遍历就好理解,往后的演变还是有点困难,我还是想搞懂一下,所以我想先写一下二次遍历
+//	public int largestRectangleArea(int[] heights) {
+//		int max=0;
+//		//是为了存一下当前的状态,没有确定左右边界之前
+//		Deque<Integer> deque=new ArrayDeque<>();
+//		int n=heights.length;
+//		//三次遍历就好理解,往后的演变还是有点困难,我还是想搞懂一下,所以我想先写一下二次遍历
+//
+//		for (int i = 0; i < n; i++) {
+//			int h=heights[i];
+//			//大于等于的时候就出现边界了---这个是哪个边界?--第一个初始怎么判断
+//			while (!deque.isEmpty()&&heights[deque.peek()]>=h){
+//				//左边界变成peek()-1,有边界变成i.为什么呢?
+//				//因为peek()前面那一个肯定是小于它的,不然就弹出了,右边界的话就是正常的这个
+//				//但是初始第一个怎么搞?--先弹进去0下标吗?--不行吧--不会了
+//
+//			}
+//			deque.push(i);
+//		}
+//
+//		return max;
+//	}
 
-		for (int i = 0; i < n; i++) {
-			int h=heights[i];
-			//大于等于的时候就出现边界了---这个是哪个边界?--第一个初始怎么判断
-			while (!deque.isEmpty()&&heights[deque.peek()]>=h){
-				//左边界变成peek()-1,有边界变成i.为什么呢?
-				//因为peek()前面那一个肯定是小于它的,不然就弹出了,右边界的话就是正常的这个
-				//但是初始第一个怎么搞?--先弹进去0下标吗?--不行吧--不会了
+/*	public int largestRectangleArea(int[] heights) {
 
-			}
-			deque.push(i);
-		}
+		//单调栈--还是需要去模拟思考一下,之前我已经思考出来一部分了,然后现在看过题解也是有点模糊
+		//先想一下简单的吧,难的我还真不会
+		//好像简单的我也有点问题啊,单调栈这个
+		//本质就是找左右端点---右端点好找,小于的,但是怎么确定最大呢?左端点怎么找?
+		//看来还是写不出来了--各种边界,好牛
 
-		return max;
-	}
+	}*/
 
 }
