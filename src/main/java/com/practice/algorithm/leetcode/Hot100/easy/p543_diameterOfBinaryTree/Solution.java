@@ -46,7 +46,7 @@ public class Solution {
 		}
 		int l=dfs(root.left,grid);
 		int r=dfs(root.right,grid);
-		grid[0]=Math.max(Math.max(l,r)+1,grid[0]);
+		grid[0]=Math.max(l+r,grid[0]);
 		return  Math.max(l,r)+1;
 	}
 
