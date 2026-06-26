@@ -37,7 +37,8 @@ public class Solution {
         maxSum=Math.max(maxSum,left+right+root.val);//v形,转弯的--不仅仅,还要那种全负的
 		return Math.max(Math.max(left,right)+root.val,0);//链式
 	}*/
-    private  static int max=Integer.MIN_VALUE;
+
+   /**private  static int max=Integer.MIN_VALUE;
 	private static void dfs(TreeNode root,int cur){
 		if(root==null){
 			return;
@@ -65,5 +66,24 @@ public class Solution {
 		dfs(root,0);
 		return max;
 
-	}
+	}*/
+
+   private static  int dfs(TreeNode root,int[] grid){
+	   if(root==null){
+		   return 0;
+	   }
+	   int l=dfs(root.left,grid);
+	   int r=dfs(root.right,grid);
+	   grid[0]=Math.max(l+r+root.val,grid[0]);
+	   return  Math.max(Math.max(l,r)+root.val,0);
+   }
+   public int maxPathSum(TreeNode root) {
+	   if(root==null){
+		   return 0;
+	   }
+	   int [] grid=new int[1];
+	   grid[0]=Integer.MIN_VALUE;
+	   dfs(root,grid);
+	   return grid[0];
+   }
 }
