@@ -50,7 +50,7 @@ public class Solution {
 	}
 */
 
-	private static void dfs(List<List<Integer>> ans,List<Integer> path,boolean[] is,int n,int [] nums,int k){
+/*	private static void dfs(List<List<Integer>> ans,List<Integer> path,boolean[] is,int n,int [] nums,int k){
 
 		if(k==n){
 			ans.add(new ArrayList<>(path));
@@ -80,6 +80,34 @@ public class Solution {
 
 
         return ans;
+	}*/
+
+	private  static  void  dfs(int cur,List<List<Integer>> ans,List<Integer> path,boolean[] isvalid,int[] nums){
+		//这个状态就是我要去遍历所有的
+		if(cur==nums.length){
+			ans.add(new ArrayList<>(path));
+			return;
+		}
+		for (int i = 0; i < nums.length; i++) {
+			if(!isvalid[i]){
+				isvalid[i]=true;
+				path.add(nums[i]);
+				dfs(cur+1,ans,path,isvalid,nums);
+				isvalid[i]=false;
+				path.remove(path.size()-1);
+			}
+		}
+
+	}
+	public List<List<Integer>> permute(int[] nums) {
+        //我也不知道会不会了,感觉都是记忆,背下来了,不知其所以然
+		//回溯--要看状态 处理 重置
+		List<List<Integer>> ans=new ArrayList<>();
+		List<Integer> path=new ArrayList<>();
+        boolean[] isvalid=new boolean[nums.length];
+		dfs(0,ans,path,isvalid,nums);
+		return ans;
+
 	}
 
 }
