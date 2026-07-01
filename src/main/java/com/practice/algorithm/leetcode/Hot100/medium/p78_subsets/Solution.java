@@ -29,7 +29,7 @@ public class Solution {
 	}
 */
 
-	private static void dfs(List<List<Integer>>  ans,List<Integer> path,int [] nums,int k,int n){
+	/**private static void dfs(List<List<Integer>>  ans,List<Integer> path,int [] nums,int k,int n){
 
 		//子集不知道怎么判定,不能是用Boolean函数了吧,
 		//子集的关键点也变成了什么时候放,肯定也是走完的时候.但是怎么放呢?
@@ -56,6 +56,33 @@ public class Solution {
 
 		dfs(ans,path,nums,0,n);
 		return ans;
+	}*/
+
+	private  static  void  dfs(int cur,List<List<Integer>> ans,List<Integer> path,int[] nums){
+		//这个状态就是我要去遍历所有的
+		if(cur==nums.length){
+			ans.add(new ArrayList<>(path));
+			return;
+		}
+		//不选
+		dfs(cur+1,ans,path,nums);
+
+		//选
+		path.add(nums[cur]);
+		dfs(cur+1,ans,path,nums);
+		path.remove(path.size()-1);
+	}
+	public List<List<Integer>> subsets(int[] nums) {
+
+		//子集--也是要走完的,但不是一个list里面走完
+		//我记得题解右两种方法---一种简洁很多,一种稍微复杂
+		//复杂的我忘了
+		List<List<Integer>> ans=new ArrayList<>();
+		List<Integer> path=new ArrayList<>();
+		dfs(0,ans,path,nums);
+		return ans;
+
+
 	}
 
 
