@@ -1,6 +1,6 @@
 package com.practice.algorithm.leetcode.Hot100.easy.p160_getIntersectionNode;
 
-
+import com.practice.algorithm.model.ListNode;
 
 /**
  * LeetCode 160. 相交
@@ -14,7 +14,7 @@ package com.practice.algorithm.leetcode.Hot100.easy.p160_getIntersectionNode;
 
 public class Solution {
 
-    public class ListNode {
+    /*public class ListNode {
         int val;
         ListNode next;
         ListNode(int x) {
@@ -37,7 +37,7 @@ public class Solution {
             n++;
             nodeB=nodeB.next;
         }
-       /* 这样写有点蠢了
+       *//* 这样写有点蠢了
         while (m>n){
             headA=headA.next;
             m--;
@@ -45,7 +45,7 @@ public class Solution {
         while (n>m){
             headB=headB.next;
             n--;
-        }*/
+        }*//*
         while (headA!=null&&headB!=null){
             if(m>n){
                 headA=headA.next;
@@ -63,5 +63,42 @@ public class Solution {
         }
 
         return null;
+    }*/
+
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+
+        //本质就是快慢指针
+        int m=0;
+        int n=0;
+        ListNode hA=headA;
+        ListNode hB=headB;
+        while (hA!=null){
+            m++;
+            hA=hA.next;
+        }
+        while (hB!=null){
+            n++;
+            hB=hB.next;
+        }
+        while (headA!=null&&headB!=null){
+
+            if(headA.equals(headB)){
+                return headA;
+            }
+
+            if(m>n){
+                m--;
+                headA=headA.next;
+            } else if (m< n) {
+                n--;
+                headB=headB.next;
+            }else {
+                headA=headA.next;
+                headB=headB.next;
+            }
+        }
+
+        return null;
     }
+
 }
