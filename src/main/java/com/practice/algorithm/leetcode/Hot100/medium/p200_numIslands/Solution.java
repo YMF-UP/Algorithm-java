@@ -16,7 +16,7 @@ import java.util.Queue;
 
 public class Solution {
 
-	private static void dfs(char[][] grid,int i,int j){
+	/*private static void dfs(char[][] grid,int i,int j){
 		//走到尽头的时候或者为0的时候就退出
 		//问题是怎么判断是否孤立啊,也就是怎么最终加一啊
 		//这个就是终止条件
@@ -57,5 +57,36 @@ public class Solution {
 			}
 		}
 		return sum;
+	}*/
+
+	private static void  dfs(char[][] grid,int i,int j){
+		if(i<0||i>grid.length||j<0||j>grid[0].length||grid[i][j]!=1){
+			return;
+		}
+		//然后就是开始遍历了--要用循环吗?
+		//循环的话怎么用?
+		//主干的话
+		if(grid[i][j]==1){
+			grid[i][j]='0';
+		    dfs(grid,i,j+1);
+		    dfs(grid,i+1,j);
+
+		}
+
+
+	}
+	public int numIslands(char[][] grid) {
+
+        //好熟悉,dfs和bfs都可以吧,看能不能写出来
+		int ans=0;
+		for (int i = 0; i < grid.length; i++) {
+			for (int j = 0; j < grid[0].length; j++) {
+				if(grid[i][j]==1){
+					dfs(grid,i,j);
+					ans++;
+				}
+			}
+		}
+      return ans;
 	}
 }
