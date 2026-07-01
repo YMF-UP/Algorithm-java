@@ -4,7 +4,20 @@ import com.practice.algorithm.model.TreeNode;
 
 public class Solutin {
 
-	private int deep(TreeNode root,int len){
+	public int maxDepth(TreeNode root) {
+
+		//我记得是有几种做法,但是我忘了
+		//突然想到了一种最简单的方法了--就也是之前哪个直径的一样了
+		if(root==null){
+			return 0;
+		}
+		int left=maxDepth(root.left);
+		int right=maxDepth(root.right);
+		return Math.max(left,right)+1;
+
+	}
+
+	/*private int deep(TreeNode root,int len){
 		   if(root==null){
 			   return len;
 		   }
@@ -15,9 +28,9 @@ public class Solutin {
           //这个是很简洁的,我记得,但是我只是记住了而已
 		 int len=deep(root,0);
 		 return len;
-	}
+	}*/
 
-	/*class Solution {
+	/**class Solution {
 		public int maxDepth(TreeNode root) {
 			if (root == null) {
 				return 0;
@@ -33,7 +46,7 @@ public class Solutin {
 	来源：力扣（LeetCode）
 	著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。*/
 
-	/*class Solution {
+	/**class Solution {
 		private int ans;
 
 		public int maxDepth(TreeNode root) {
