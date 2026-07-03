@@ -16,7 +16,38 @@ import java.util.List;
 
 public class Solution {
 
+
     public static List<Integer> spiralOrder(int[][] matrix) {
+
+        //旋转--貌似就是一个普通模拟,难点在于二维不好操作吗?
+        //按顺序四个方向---还有步数. 这两个考虑
+        //四个方向还好,主要是步数这个怎么动态变化
+        int[][] direction={{0,1},{-1,0},{0,-1},{-1,0}};
+        //每走完一个行,列的步数就减一,同理走完一个列,行的步数就减一
+        List<Integer> ans=new ArrayList<>();
+        int m=matrix.length;
+        int n=matrix[0].length;
+        int cur=0;
+        int k=-1,i=0,j=-1;
+        while (m!=0&&n!=0){
+            cur=m;
+            m=n;
+            n=cur;
+            k=(k+1)%4;
+            for (int l = 0; l < cur; l++) {
+                i=i+direction[k][0];
+                j=j+direction[k][1];
+                ans.add(matrix[i][j]);
+            }
+            m-=1;
+
+        }
+
+
+        return ans;
+    }
+
+   /* public static List<Integer> spiralOrder(int[][] matrix) {
         List<Integer> list=new ArrayList<>();
         // 碰到尽头就转弯---重点就是尽头---其实就是每转两次弯一次就少一个，除了第一次
         // 特殊处理第一行
@@ -59,7 +90,7 @@ public class Solution {
             }
 
         }
-        return list;
+        return list;*/
       /*  ///  还是想不到啊怎么--有时候是差一点--有时候差了好多
         List<Integer> res=new ArrayList<>();
         int Dir[][] ={{0,1},{1,0},{0,-1},{-1,0}};//这个确实挺牛的
@@ -97,7 +128,7 @@ public class Solution {
         }
         return res;*/
 
-        /// 其实步长也能做---比我之前想的状态处理要简单一些
+    /// 其实步长也能做---比我之前想的状态处理要简单一些
        /* List<Integer> res=new ArrayList<>();
         int rows=matrix.length;
         int lists=matrix[0].length;
@@ -143,7 +174,8 @@ public class Solution {
 //        链接：https://leetcode.cn/problems/spiral-matrix/solutions/2966229/liang-chong-fang-fa-jian-ji-gao-xiao-pyt-4wzk/
 //        来源：力扣（LeetCode）
 //        著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
-    }
+
+
 
     public static void main(String[] args) {
         int ma[][]={{1,2,3},{4,5,6},{7,8,9}};
