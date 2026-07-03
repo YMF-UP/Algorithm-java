@@ -22,7 +22,7 @@ public class Solution {
         //旋转--貌似就是一个普通模拟,难点在于二维不好操作吗?
         //按顺序四个方向---还有步数. 这两个考虑
         //四个方向还好,主要是步数这个怎么动态变化
-        int[][] direction={{0,1},{-1,0},{0,-1},{-1,0}};
+        int[][] direction={{0,1},{1,0},{0,-1},{-1,0}};
         //每走完一个行,列的步数就减一,同理走完一个列,行的步数就减一
         List<Integer> ans=new ArrayList<>();
         int m=matrix.length;
@@ -30,16 +30,16 @@ public class Solution {
         int cur=0;
         int k=-1,i=0,j=-1;
         while (m!=0&&n!=0){
-            cur=m;
-            m=n;
-            n=cur;
+            cur=n;
+            n=m;
+            m=cur;
             k=(k+1)%4;
             for (int l = 0; l < cur; l++) {
                 i=i+direction[k][0];
                 j=j+direction[k][1];
                 ans.add(matrix[i][j]);
             }
-            m-=1;
+            n-=1;
 
         }
 
