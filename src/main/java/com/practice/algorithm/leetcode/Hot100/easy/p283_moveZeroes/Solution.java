@@ -1,6 +1,4 @@
-package com.practice.algorithm.leetcode.Hot100.easy.p238_moveZeroes;
-
-import java.util.Arrays;
+package com.practice.algorithm.leetcode.Hot100.easy.p283_moveZeroes;
 
 public class Solution {
 
