@@ -16,24 +16,32 @@ import com.practice.algorithm.model.ListNode;
 
 
 public class Solution {
+//	public ListNode detectCycle(ListNode head) {
+//        //不看题解还真不知道是这么个意思--既然看了那就先写一下
+//		// 主要还是一个数学公式推导
+//		ListNode slow=head;
+//		ListNode fast=head;
+//		while (fast!=null&&fast.next!=null){
+//			slow=slow.next;
+//			fast=fast.next.next;
+//			if(slow==fast){
+//				//相遇了---但不是入环点
+//				// 纯数学推导---(kc-a)+a
+//				while (slow!=head){
+//					head=head.next;
+//					slow=slow.next;
+//				}
+//				return head;
+//			}
+//		}
+//		return null;
+//	}
+
 	public ListNode detectCycle(ListNode head) {
-        //不看题解还真不知道是这么个意思--既然看了那就先写一下
-		// 主要还是一个数学公式推导
-		ListNode slow=head;
-		ListNode fast=head;
-		while (fast!=null&&fast.next!=null){
-			slow=slow.next;
-			fast=fast.next.next;
-			if(slow==fast){
-				//相遇了---但不是入环点
-				// 纯数学推导---(kc-a)+a
-				while (slow!=head){
-					head=head.next;
-					slow=slow.next;
-				}
-				return head;
-			}
-		}
-		return null;
+		//还是不行,我本来想得是计算长度,但是环形的怎么计算长度啊
+		//快慢指针相遇的时候一定是走了一圈吗?--不对,取决于环形长度还是
+		//问题是,怎么计算长度啊,因为环形的话,快慢指针
+
 	}
+
 }
