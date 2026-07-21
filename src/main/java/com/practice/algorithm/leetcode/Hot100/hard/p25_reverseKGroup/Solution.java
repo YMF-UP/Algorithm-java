@@ -60,31 +60,31 @@ public class Solution {
 		//第一步--判断能不能有k个;第二步就是开始翻转就行了
 		int count=0;
 		ListNode dummy=new ListNode(0,head);
-		ListNode cur=dummy.next;
+		ListNode p=dummy;
+		ListNode cur=dummy;
 		while (cur!=null){
-			ListNode test=cur;
-		  while (test!=null&&count%k!=0){
-			test=test.next;
+			count=0;
+			//这个就不对了,因为成功后的下一次一定能够整除k
+			while (cur!=null&&count!=k){
+			cur=cur.next;
 			count++;
-		   }
+		    }
 		  if(count%k!=0){
 			break;
 		   }
 		  //问题是第一个需要把dummy的next给处理了啊,怎么处理
-
-		  int num=k;
-		  ListNode next=cur.next;
+		  //要进行一次初始化--还缺一个初始的
+          ListNode pre=p.next;//从这个开始翻转啊
+		  p.next=cur;
+		  p=cur;
 		  //开始翻转
-		  while (num!=0){
-			  ListNode third=next.next;
-			  next.next=cur;
-			  cur.next=null;
-			  cur=third;
-			  num--;
+		  while (count!=0&&pre.next!=null){
+			  ListNode  node2=pre.next;
+			  ListNode node3=node2.next;
+			  node2.next=pre;
+			  pre=node3;
 		  }
-			if(count==k){
-				dummy.next=cur;
-			}
+
 	   }
 		return dummy.next;
 	}
