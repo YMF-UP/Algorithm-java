@@ -89,6 +89,38 @@ public class Solution {
 		return dummy.next;
 	}
 
+	/** 递归确实牛
+	 * public ListNode reverseKGroup(ListNode head, int k) {
+		// 1. 检查是否有 K 个节点
+		ListNode cur = head;
+		for (int i = 0; i < k; i++) {
+			if (cur == null) return head; // 不足 K 个，不翻转
+			cur = cur.next;
+		}
+
+		// 2. 翻转前 K 个节点（从 head 到 cur 之前）
+		ListNode newHead = reverse(head, cur);
+
+		// 3. 递归处理后续部分，并连接
+		head.next = reverseKGroup(cur, k);
+
+		return newHead;
+	}
+
+	// 辅助：翻转 [head, tail) 区间，返回新头
+	private ListNode reverse(ListNode head, ListNode tail) {
+		ListNode prev = tail;
+		while (head != tail) {
+			ListNode nxt = head.next;
+			head.next = prev;
+			prev = head;
+			head = nxt;
+		}
+		return prev;
+	}*/
+
+
+
 	public static void main(String[] args) {
 		ListNode head = new ListNode(1);
 		head.next = new ListNode(2);
