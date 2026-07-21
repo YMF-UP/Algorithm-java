@@ -16,43 +16,77 @@ import com.practice.algorithm.model.ListNode;
 
 public class Solution {
 
+//	public static ListNode reverseKGroup(ListNode head, int k) {
+//        //这个是分组处理--本来是想到反转链表的---但是不确定k是否存在吧--或者说先判断?
+//        //感觉就还是先判断然后反转--短于k的就不反转了
+//		//有一点的逻辑思考啊--k范围内做转置--但是多两个点考虑:1.首位 2.跟随--也包括了返回值
+//		ListNode dummy=new ListNode(0,head);
+//		ListNode node=dummy;
+//		int count=0;
+//		while (count==0&&dummy.next!=null){
+//			ListNode nodek=dummy;
+//			count=k;
+//			//一定要先判断是否在k以内吗?
+//            while(count!=0&&nodek.next!=null){
+//				nodek=nodek.next;
+//				count--;
+//            }
+//			ListNode next=nodek.next;
+//			ListNode node1=dummy.next;
+//			ListNode node2=node1.next;
+//			if(node2==null){
+//				break;
+//			}
+//			ListNode node3;
+//			// 提前处理一下首尾吗?--不提前会怎么样
+//			if (count==0){
+//				node1.next=next;
+//				dummy.next=nodek;
+//				dummy=node1;
+//			}
+//			//开始反转
+//			while (count==0&&node2!=next){
+//				node3=node2.next;
+//			    node2.next=node1;
+//			    node1=node2;
+//			    node2=node3;
+//			}
+//		}
+//		return node.next;
+//	}
+
 	public static ListNode reverseKGroup(ListNode head, int k) {
-        //这个是分组处理--本来是想到反转链表的---但是不确定k是否存在吧--或者说先判断?
-        //感觉就还是先判断然后反转--短于k的就不反转了
-		//有一点的逻辑思考啊--k范围内做转置--但是多两个点考虑:1.首位 2.跟随--也包括了返回值
-		ListNode dummy=new ListNode(0,head);
-		ListNode node=dummy;
+		//还真是手生了啊,完全就很困惑了,感觉很简单
+		//第一步--判断能不能有k个;第二步就是开始翻转就行了
 		int count=0;
-		while (count==0&&dummy.next!=null){
-			ListNode nodek=dummy;
-			count=k;
-			//一定要先判断是否在k以内吗?
-            while(count!=0&&nodek.next!=null){
-				nodek=nodek.next;
-				count--;
-            }
-			ListNode next=nodek.next;
-			ListNode node1=dummy.next;
-			ListNode node2=node1.next;
-			if(node2==null){
-				break;
+		ListNode dummy=new ListNode(0,head);
+		ListNode cur=dummy.next;
+		while (cur!=null){
+			ListNode test=cur;
+		  while (test!=null&&count%k!=0){
+			test=test.next;
+			count++;
+		   }
+		  if(count%k!=0){
+			break;
+		   }
+		  //问题是第一个需要把dummy的next给处理了啊,怎么处理
+
+		  int num=k;
+		  ListNode next=cur.next;
+		  //开始翻转
+		  while (num!=0){
+			  ListNode third=next.next;
+			  next.next=cur;
+			  cur.next=null;
+			  cur=third;
+			  num--;
+		  }
+			if(count==k){
+				dummy.next=cur;
 			}
-			ListNode node3;
-			// 提前处理一下首尾吗?--不提前会怎么样
-			if (count==0){
-				node1.next=next;
-				dummy.next=nodek;
-				dummy=node1;
-			}
-			//开始反转
-			while (count==0&&node2!=next){
-				node3=node2.next;
-			    node2.next=node1;
-			    node1=node2;
-			    node2=node3;
-			}
-		}
-		return node.next;
+	   }
+		return dummy.next;
 	}
 
 	public static void main(String[] args) {
