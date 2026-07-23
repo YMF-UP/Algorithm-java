@@ -34,17 +34,20 @@ public class Solution {
 //	}
 
 	private  static boolean  test(TreeNode left,TreeNode right){
-		if(left.left!=right.right||left.right!=right.left){
+		if(left==null||right==null){
+			return left==right;
+		}
+		if(left.val!=right.val){
 			return false;
 		}
-		test(left.left,right.right);
-		test(left.right,right.left);
+		boolean isL=test(left.left,right.right);
+		boolean isR=test(left.right,right.left);
         //返回还有点问题啊,不能这么返回的啊
-		return true;
+		return isL&&isR;
 	}
 	public boolean isSymmetric(TreeNode root) {
 		//说实话我对之前写的一点点印象都没有了
-		return   test(root,root);
+		return   test(root.left,root.right);
 	}
 
 }
