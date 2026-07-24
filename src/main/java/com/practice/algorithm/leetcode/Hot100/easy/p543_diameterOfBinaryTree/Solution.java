@@ -40,22 +40,36 @@ public class Solution {
 //		 return  maxDiameter;
 //	}
 
-	private static  int dfs(TreeNode root,int[] grid){
+//	private static  int dfs(TreeNode root,int[] grid){
+//		if(root==null){
+//			return 0;
+//		}
+//		int l=dfs(root.left,grid);
+//		int r=dfs(root.right,grid);
+//		grid[0]=Math.max(l+r,grid[0]);
+//		return  Math.max(l,r)+1;
+//	}
+//
+//	public int diameterOfBinaryTree(TreeNode root) {
+//		int [] grid=new int[1];
+//		grid[0]=0;
+//		dfs(root,grid);
+//		return grid[0];
+//
+//	}
+
+	public int diameterOfBinaryTree(TreeNode root) {
+
+		//只提交当前节点的最大程度,然后合并对吧,在哪里合并呢?节点处,那是哪里呢?
+		//其实就是说我当前还是搞不明白状态这些个
 		if(root==null){
 			return 0;
 		}
-		int l=dfs(root.left,grid);
-		int r=dfs(root.right,grid);
-		grid[0]=Math.max(l+r,grid[0]);
-		return  Math.max(l,r)+1;
-	}
-
-	public int diameterOfBinaryTree(TreeNode root) {
-		int [] grid=new int[1];
-		grid[0]=0;
-		dfs(root,grid);
-		return grid[0];
-
+		int left=diameterOfBinaryTree(root.left);
+		int right=diameterOfBinaryTree(root.right);
+//		return Math.max(right,left)+1; 不对啊,这个
+		//要返回的是直径,也就是两个的和
+		//left和right都应该是节点下的
 	}
 
 }
